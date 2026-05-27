@@ -12,8 +12,11 @@
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
         <!-- Simple line icons-->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.5.5/css/simple-line-icons.min.css" rel="stylesheet" />
-        <!-- Google fonts-->
-        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css" />
+        <!-- Google fonts: Inter for body, Poppins for headings -->
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+        <!-- GSAP -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" crossorigin="anonymous"></script>
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
     </head>
@@ -23,20 +26,23 @@
         <nav id="sidebar-wrapper">
             <ul class="sidebar-nav">
                 <li class="sidebar-brand"><a href="#page-top"></a></li>
-                <li class="sidebar-brand"><a href="#page-top">Home</a></li>
-                <li class="sidebar-nav-item"><a href="#Platformer">Platformer</a></li>
-                <li class="sidebar-nav-item"><a href="#SpaceJam">SpaceJam</a></li>
-                <li class="sidebar-nav-item"><a href="#Robot">Robot</a></li>
-                <li class="sidebar-nav-item"><a href="#TowerDefense">Tower Defense</a></li>
-                <li class="sidebar-nav-item"><a href="#Other">Autres projets</a></li>
+                <li class="sidebar-brand"><a href="#page-top" data-lang-key="navHome">Accueil</a></li>
+                <li class="sidebar-nav-item"><a href="#Platformer" data-lang-key="navPlatformer">Platformer</a></li>
+                <li class="sidebar-nav-item"><a href="#SpaceJam" data-lang-key="navSpaceJam">SpaceJam</a></li>
+                <li class="sidebar-nav-item"><a href="#Robot" data-lang-key="navRobot">Robot</a></li>
+                <li class="sidebar-nav-item"><a href="#TowerDefense" data-lang-key="navTowerDefense">Tower Defense</a></li>
+                <li class="sidebar-nav-item"><a href="#Other" data-lang-key="navOther">Autres projets</a></li>
+                <li class="sidebar-nav-item" style="margin-top: 2rem; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 1rem;">
+                    <button id="lang-toggle-sidebar" class="btn btn-outline-light btn-sm" type="button" style="width: 100%;">EN</button>
+                </li>
             </ul>
         </nav>
         <!-- Header-->
         <header class="masthead d-flex align-items-center">
             <div class="container px-4 px-lg-5 text-center">
-                <h1 class="mb-1">Portfolio</h1>
-                <br><h2 class="mb-5"><em>Bonjour!<br> Bienvenue sur mon portfolio! Je m'appelle Guillaume Gachelin et je suis en premiere année de création de jeux vidéo. A ce qu'on dit, le monde a besoin d'etre diverti alors me voici!</em></h2>
-                <a class="btn btn-primary btn-xl" href="#Platformer">Find Out More</a>
+                <h1 class="mb-1" data-lang-key="headerTitle">Portfolio</h1>
+                <br><h2 class="mb-5" data-lang-key="headerSubtitle"><em>Bonjour!<br> Bienvenue sur mon portfolio! Je m'appelle Guillaume Gachelin et je suis en premiere année de création de jeux vidéo. A ce qu'on dit, le monde a besoin d'etre diverti alors me voici!</em></h2>
+                <a class="btn btn-primary btn-xl" href="#Platformer" data-lang-key="headerButton">En savoir plus</a>
             </div>
         </header>
                 <!-- Platformer-->
@@ -47,11 +53,11 @@
                         <img class="img-fluid" src="assets/img/Capture d'écran 2026-05-21 204825.png" alt="robot" />
                     </div>
                     <div class="col-lg-7 pe-5">
-                        <h2>Projet de fin d'année : Rabbit Factory</h2>
-                        <p class="lead mb-6">
+                        <h2 data-lang-key="platformerTitle">Projet de fin d'année : Rabbit Factory</h2>
+                        <p class="lead mb-6" data-lang-key="platformerText">
                             L'objectif de ce projet est de concevoir seul un jeu de plateforme en 2D à défilement horizontal en trois mois. <br>
                            Voici ce que j'ai imaginé : Dans un laboratoire expérimental des années 2070, des chercheurs font des expériences sur des animaux. Un lapin, à la suite d’un effondrement, sort de sa cuve. Son objectif : s’échapper du labo. Pour l’aider, il redécouvrira que ses oreilles ont des pouvoirs bien singuliers... A tester sur
-                            <a href="https://fykshin.itch.io/Rabbit_Factory">itch.io</a>
+                            <a href="https://fykshin.itch.io/Rabbit_Factory" style="color: #1D809F; background: none; border: none; text-decoration: underline;">itch.io</a>
                             ! <br> Le principe de ce platformer est de débloquer de nouvelles capacités au fur et à mesure de la progression du joueur. Par exemple, le joueur pourra courir, sauter, faire des wall jumps et tourner le monde autour de lui. Pour pouvoir progresser dans le jeu, il lui faudra trouver un certain nombre de clés pour débloquer chaque salles.
                         </p>
                     </div>
@@ -67,10 +73,10 @@
                         <img class="img-fluid" src="assets/img/Capture d'écran 2026-04-19 154747.png" alt="robot" />
                     </div>
                     <div class="col-lg-7 pe-5">
-                        <h2>Participation à la Space Game Jam 99</h2>
-                        <p class="lead mb-6">
+                        <h2 data-lang-key="spaceJamTitle">Participation à la Space Game Jam 99</h2>
+                        <p class="lead mb-6" data-lang-key="spaceJamText">
                             Thème choisi  : "Communication Asymétrique". Un jeu 3D éducatif sur les différents thèmes de la Game Jam, créé par 5 étudiants de première année. A l'aide d'antennes, récupérez les informations des satellites en orbite pour répondre aux missions de vos clients dans le temps imparti.
-                            <a href="https://dineil.itch.io/starcom" style="color: black;">itch.io</a>
+                            <a href="https://dineil.itch.io/starcom" style="color: #1D809F; background: none; border: none; text-decoration: underline;">itch.io</a>
                             !
                         </p>
                     </div>
@@ -82,8 +88,8 @@
             <div class="container px-0">
                 <div class="row gx-5">
                     <div class="col-lg-7 pe-5">
-                        <h2>Tiny Robot</h2>
-                        <p class="lead mb-6">
+                        <h2 data-lang-key="robotTitle">Tiny Robot</h2>
+                        <p class="lead mb-6" data-lang-key="robotText">
                             Un projet de modélisation 3D où l'objectif était de reproduire une référence aussi fidèlement que possible à partir de photographies. Sans limite de polygones et sans contrainte de texturing ou de dépliage UV, ce projet s'est concentré sur la précision géométrique et la capture des détails du modèle original. C'était une excellente occasion de pratiquer les techniques de modeling 3D et de composition tout en développant un œil critique pour l'observation des formes et des proportions.
                         </p>
                     </div>
@@ -98,8 +104,8 @@
             <div class="container px-0">
                 <div class="row gx-5">
                     <div class="col-lg-7 pe-5">
-                        <h2>Tower Defense</h2>
-                        <p class="lead mb-6">
+                        <h2 data-lang-key="towerDefenseTitle">Tower Defense</h2>
+                        <p class="lead mb-6" data-lang-key="towerDefenseText">
                             Un projet rapide développé en mettant l'accent sur la programmation. Ce jeu Tower Defense met en avant la gestion des vagues d'ennemis et d'alliés, en ayant pour but de tirer avec le bon type de balle sur les arrivants.
                         </p>
                     </div>
@@ -113,33 +119,49 @@
         <section class="content-section" id="Other">
             <div class="container px-4 px-lg-5">
                 <div class="content-section-heading text-center">
-                    <h3 class="text-secondary mb-0">Portfolio</h3>
-                    <h2 class="mb-5">Other Projects</h2>
+                    <h3 class="text-secondary mb-0" data-lang-key="projectsTitle">Portfolio</h3>
+                    <h2 class="mb-5" data-lang-key="projectsSubtitle">Autres projets</h2>
                 </div>
                 <div class="row gx-0">
                     <div class="col-lg-6">
                         <a class="portfolio-item" href="digital-painting.html">
                             <div class="caption">
                                 <div class="caption-content">
-                                    <div class="h2">Digital Painting</div>
-                                    <p class="mb-0">See More !</p>
+                                    <div class="h2" data-lang-key="digitalPaintingTitle">Digital Painting</div>
+                                    <p class="mb-0" data-lang-key="digitalPaintingLink">Voir plus !</p>
                                 </div>
                             </div>
                             <img class="img-fluid" src="assets/img/Capture d’écran 2026-05-04 200950.png" alt="..." />
                         </a>
                     </div>
                     <div class="col-lg-6">
-                        <a class="portfolio-item" href="3d-projects.html"><div class="caption"><div class="caption-content"><div class="h2">3D Projects</div><p class="mb-0">See more !</p></div></div><img class="img-fluid" src="assets/img/Image Sequence_008_0000.png" alt="..." /></a>
+                        <a class="portfolio-item" href="3d-projects.html">
+                            <div class="caption">
+                                <div class="caption-content">
+                                    <div class="h2" data-lang-key="threeDProjectsTitle">Projets 3D</div>
+                                    <p class="mb-0" data-lang-key="threeDProjectsLink">Voir plus !</p>
+                                </div>
+                            </div>
+                            <img class="img-fluid" src="assets/img/Image Sequence_008_0000.png" alt="..." />
+                        </a>
                     </div>
                     <div class="col-lg-6">
-                        <a class="portfolio-item" href="dessins.html"><div class="caption"><div class="caption-content"><div class="h2">Dessins</div><p class="mb-0">See more !</p></div></div><img class="img-fluid" src="assets/img/papillion.png" alt="..." /></a>
+                        <a class="portfolio-item" href="dessins.html">
+                            <div class="caption">
+                                <div class="caption-content">
+                                    <div class="h2" data-lang-key="dessinsTitle">Dessins</div>
+                                    <p class="mb-0" data-lang-key="dessinsLink">Voir plus !</p>
+                                </div>
+                            </div>
+                            <img class="img-fluid" src="assets/img/papillion.png" alt="..." />
+                        </a>
                     </div>
                     <div class="col-lg-6">
                         <a class="portfolio-item" href="vectorial-painting.html">
                             <div class="caption">
                                 <div class="caption-content">
-                                    <div class="h2">Vectorial Painting</div>
-                                    <p class="mb-0">See more !</p>
+                                    <div class="h2" data-lang-key="vectorialTitle">Peinture vectorielle</div>
+                                    <p class="mb-0" data-lang-key="vectorialLink">Voir plus !</p>
                                 </div>
                             </div>
                             <img class="img-fluid" src="assets/img/Capture d'écran 2026-01-07 004833.png" alt="..." />

@@ -57,7 +57,7 @@
   --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
-  --bs-body-font-family: Source Sans Pro, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  --bs-body-font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --bs-body-font-size: 1rem;
   --bs-body-font-weight: 400;
   --bs-body-line-height: 1.5;
@@ -102,6 +102,61 @@ body {
   background-color: var(--bs-body-bg);
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+/* Headings use Poppins for a more modern look */
+h1, h2, h3, h4, h5, h6 {
+  font-family: Poppins, var(--bs-body-font-family);
+}
+
+/* Animated link styles */
+a {
+  background: linear-gradient(90deg, #1D809F, #17667f, #1D809F);
+  background-size: 200% 200%;
+  animation: linkGradient 3s ease infinite;
+  text-decoration: none;
+  border-bottom: 2px solid;
+  border-image: linear-gradient(90deg, #1D809F, #ecb807) 1;
+  transition: all 0.3s ease;
+}
+
+a:hover {
+  filter: brightness(1.2);
+  transform: translateY(-2px);
+}
+
+@keyframes linkGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Section entrance animations */
+.content-section {
+  transform: translateZ(0);
+}
+
+/* Other projects section background */
+#Other {
+  background-color: #fff;
+  padding: 3.2rem 0;
+}
+
+/* Portfolio items styling */
+.portfolio-item {
+  min-height: 280px;
+  margin-bottom: 1.5rem;
+}
+
+.portfolio-item img {
+  opacity: 1;
+  transition: opacity 0.3s ease;
 }
 
 hr {
@@ -383,6 +438,7 @@ button,
 [type=button],
 [type=reset],
 [type=submit] {
+  appearance: button;
   -webkit-appearance: button;
 }
 button:not(:disabled),
@@ -441,6 +497,7 @@ legend + * {
 
 [type=search] {
   outline-offset: -2px;
+  appearance: textfield;
   -webkit-appearance: textfield;
 }
 
@@ -462,6 +519,7 @@ legend + * {
 
 ::file-selector-button {
   font: inherit;
+  appearance: button;
   -webkit-appearance: button;
 }
 
@@ -600,6 +658,47 @@ progress {
 .img-fluid {
   max-width: 100%;
   height: auto;
+}
+
+/* Enhanced portfolio visuals for GSAP animations */
+.portfolio-item {
+  overflow: hidden;
+  display: block;
+  position: relative;
+  border-radius: 0.5rem;
+  text-decoration: none;
+}
+.portfolio-item:hover {
+  text-decoration: none;
+}
+.portfolio-item img {
+  transition: transform 0.6s ease, filter 0.3s ease;
+  display: block;
+  width: 100%;
+  will-change: transform;
+}
+.portfolio-item .caption {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(29, 128, 159, 0);
+  opacity: 0;
+  transition: opacity 0.25s ease, background 0.25s ease;
+}
+.portfolio-item:hover .caption {
+  opacity: 1;
+  background: rgba(29, 128, 159, 0.95);
+}
+
+/* Slightly elevate sections and headings for a modern look */
+section.content-section {
+  padding-top: 3.2rem;
+  padding-bottom: 3.2rem;
+}
+section.content-section h2 {
+  letter-spacing: -0.02em;
 }
 
 .img-thumbnail {
@@ -11020,11 +11119,19 @@ footer.footer .social-link:hover {
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
+  overflow: hidden;
 }
 .masthead h1, .masthead .h1 {
   font-size: 4rem;
   margin: 0;
   padding: 0;
+  will-change: transform, opacity;
+}
+.masthead h2 {
+  will-change: transform, opacity;
+}
+.content-section {
+  transform: translateZ(0);
 }
 @media (min-width: 992px) {
   .masthead {
@@ -11041,20 +11148,30 @@ footer.footer .social-link:hover {
   overflow: hidden;
   max-width: 530px;
   margin: auto auto 1rem;
+  text-decoration: none;
+  border-bottom: none !important;
+}
+.portfolio-item:hover {
+  text-decoration: none;
+  border-bottom: none !important;
 }
 .portfolio-item .caption {
   display: flex;
   height: 100%;
   width: 100%;
-  background-color: rgba(33, 37, 41, 0.2);
+  background-color: rgba(29, 128, 159, 0);
   position: absolute;
   top: 0;
   bottom: 0;
   z-index: 1;
+  opacity: 0;
+  transition: opacity 0.3s ease, background-color 0.3s ease;
 }
 .portfolio-item .caption .caption-content {
   color: #fff;
   margin: auto 2rem 2rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 .portfolio-item .caption .caption-content h2, .portfolio-item .caption .caption-content .h2 {
   font-size: 0.8rem;
@@ -11064,20 +11181,24 @@ footer.footer .social-link:hover {
   font-weight: 300;
   font-size: 1.2rem;
 }
+.portfolio-item:hover .caption {
+  opacity: 1;
+  background-color: rgba(29, 128, 159, 0.95);
+}
+.portfolio-item:hover .caption .caption-content {
+  opacity: 1;
+}
 @media (min-width: 992px) {
   .portfolio-item {
     max-width: none;
     margin: 0;
   }
   .portfolio-item .caption {
-    transition: background-color 0.7s, -webkit-clip-path 0.25s ease-out;
-    transition: clip-path 0.25s ease-out, background-color 0.7s;
-    transition: clip-path 0.25s ease-out, background-color 0.7s, -webkit-clip-path 0.25s ease-out;
+    transition: background-color 0.7s;
     -webkit-clip-path: inset(0px);
             clip-path: inset(0px);
   }
   .portfolio-item .caption .caption-content {
-    transition: opacity 0.25s;
     margin-left: 5rem;
     margin-right: 5rem;
     margin-bottom: 5rem;
@@ -11090,13 +11211,13 @@ footer.footer .social-link:hover {
             clip-path: inset(-1px);
   }
   .portfolio-item:hover img {
-    -webkit-clip-path: inset(2rem);
-            clip-path: inset(2rem);
+    -webkit-clip-path: inset(-1px);
+            clip-path: inset(-1px);
   }
   .portfolio-item:hover .caption {
-    background-color: rgba(29, 128, 159, 0.9);
-    -webkit-clip-path: inset(2rem);
-            clip-path: inset(2rem);
+    background-color: rgba(29, 128, 159, 0.95);
+    -webkit-clip-path: inset(0px);
+            clip-path: inset(0px);
   }
 }
 
