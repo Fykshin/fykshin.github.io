@@ -70,6 +70,15 @@
 
         window.addEventListener('scroll', onScroll, { passive: true });
 
+        // Rebuild targets/path when language changes (text length may change layout)
+        document.addEventListener('languageChanged', () => {
+            // small delay to allow DOM to finish updating
+            setTimeout(() => {
+                collectTargets();
+                buildPath();
+            }, 60);
+        });
+
         animate();
     }
 
@@ -108,28 +117,28 @@
 
         const curvePoints = [];
 
-        targets.forEach((target, i) => {
-            const clusterOffset = 140;
-            let clusterX = i % 2 === 0
-                ? target.x - clusterOffset
-                : target.x + clusterOffset;
+targets.forEach((target, i) => {
 
-            clusterX = Math.max(
-                CONFIG.clusterRadius + 20,
-                Math.min(window.innerWidth - CONFIG.clusterRadius - 20, clusterX)
-            );
+    const margin = 25;
 
-            const waveX = clusterX + Math.sin(i * CONFIG.waveFrequency) * (CONFIG.waveAmplitude * 0.5);
+  const clusterX =
+    i % 2 === 0
+        ? margin + Math.random() * 40
+        : window.innerWidth - margin - Math.random() * 40;
 
-            curvePoints.push({ x: waveX, y: target.y });
+    curvePoints.push({
+        x: clusterX,
+        y: target.y
+    });
 
-            clusters.push({
-                x: clusterX,
-                y: target.y,
-                stars: generateClusterStars(clusterX, target.y),
-                pathProgress: 0,
-            });
-        });
+    clusters.push({
+        x: clusterX,
+        y: target.y,
+        stars: generateClusterStars(clusterX, target.y),
+        pathProgress: 0,
+    });
+
+});
 
         const STEPS = 800;
         for (let i = 0; i < STEPS; i++) {

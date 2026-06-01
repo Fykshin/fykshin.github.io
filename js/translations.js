@@ -65,6 +65,10 @@ const initializeLanguage = () => {
     }
 
     setLanguage(currentLang);
+
+    // Notify other scripts that language was initialized/changed
+    // so they can update sizes/positions (e.g. canvas trails)
+    document.dispatchEvent(new Event('languageChanged'));
 };
 
 document.addEventListener('DOMContentLoaded', initializeLanguage);
