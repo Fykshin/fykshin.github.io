@@ -129,8 +129,8 @@
             /* Bouton flottant */
             #theme-toggle {
                 position: fixed;
-                bottom: 2rem;
-                right: 2rem;
+                top: 1.5rem;
+                right: 1.5rem;
                 width: 52px;
                 height: 52px;
                 border-radius: 50%;

@@ -77,9 +77,9 @@ window.addEventListener('DOMContentLoaded', event => {
                     duration: 0.9,
                     scrollTrigger: {
                         trigger: section,
-                        start: 'top 80%',
-                        end: 'top 40%',
-                        scrub: 0.3,
+                        start: 'top 90%',
+                        toggleActions: 'play none none none',
+                        once: true,
                     }
                 });
             });
@@ -93,10 +93,10 @@ window.addEventListener('DOMContentLoaded', event => {
                     duration: 0.7,
                     delay: idx * 0.1,
                     scrollTrigger: {
-                        trigger: '#Other',
-                        start: 'top 75%',
-                        end: 'top 50%',
-                        scrub: 0.2
+                        trigger: item,
+                        start: 'top 90%',
+                        toggleActions: 'play none none none',
+                        once: true,
                     }
                 });
             });

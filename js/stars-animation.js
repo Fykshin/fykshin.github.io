@@ -14,7 +14,7 @@
         samplingStep: 4,                              // analyser 1 pixel sur X (4 = rapide, 1 = précis mais lent)
         minStarRadius: 0.8,                           // taille min des étoiles canvas
         maxStarRadius: 2.5,                           // taille max des étoiles canvas
-        twinkleSpeed: 0.2,                          // vitesse de scintillement (plus grand = plus rapide)
+        twinkleSpeed: 0.5,                          // vitesse de scintillement (plus grand = plus rapide)
         twinkleMinOpacity: 0.1,                       // opacité minimale pendant le scintillement
         twinkleMaxOpacity: 1.0,                       // opacité maximale pendant le scintillement
         starColor: '200, 220, 255',                   // couleur RGB des étoiles canvas
