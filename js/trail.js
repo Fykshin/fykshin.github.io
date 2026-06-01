@@ -2,9 +2,9 @@
 
     const CONFIG = {
         starColor: '255, 220, 100',
-        starRadius: 1.5,
-        starSpacing: 18,
-        glowSize: 6,
+        starRadius: 3,
+        starSpacing: 20,
+        glowSize: 4,
         clusterRadius: 28,
         clusterCount: 7,
         twinkleSpeed: 0.8,
@@ -30,7 +30,6 @@
         '#Platformer img',
         '#Platformer a[href*="itch.io"]',
         '#SpaceJam h2',
-        '#SpaceJam img',
         '#SpaceJam a[href*="itch.io"]',
         '#Robot h2',
         '#Robot img',
@@ -55,7 +54,8 @@
             pointer-events: none;
             z-index: 999;
         `;
-        canvas.style.mixBlendMode = 'screen';
+        updateBlendMode();
+        document.body.addEventListener('themechange', updateBlendMode);
         document.body.appendChild(canvas);
         resize();
 
@@ -71,6 +71,11 @@
         window.addEventListener('scroll', onScroll, { passive: true });
 
         animate();
+    }
+
+    function updateBlendMode() {
+        const isDay = document.body.classList.contains('theme-day');
+        canvas.style.mixBlendMode = isDay ? 'normal' : 'screen';
     }
 
     function resize() {
@@ -104,14 +109,24 @@
         const curvePoints = [];
 
         targets.forEach((target, i) => {
-            const side = i % 2 === 0 ? -CONFIG.sideOffset : CONFIG.sideOffset;
-            const waveX = target.x + side + Math.sin(i * CONFIG.waveFrequency) * CONFIG.waveAmplitude;
+            const clusterOffset = 140;
+            let clusterX = i % 2 === 0
+                ? target.x - clusterOffset
+                : target.x + clusterOffset;
+
+            clusterX = Math.max(
+                CONFIG.clusterRadius + 20,
+                Math.min(window.innerWidth - CONFIG.clusterRadius - 20, clusterX)
+            );
+
+            const waveX = clusterX + Math.sin(i * CONFIG.waveFrequency) * (CONFIG.waveAmplitude * 0.5);
+
             curvePoints.push({ x: waveX, y: target.y });
 
             clusters.push({
-                x: target.x,
+                x: clusterX,
                 y: target.y,
-                stars: generateClusterStars(target.x, target.y),
+                stars: generateClusterStars(clusterX, target.y),
                 pathProgress: 0,
             });
         });
@@ -193,10 +208,13 @@
 
         const now = Date.now() / 1000;
         const scrollY = window.scrollY || window.pageYOffset;
+        const isDay = document.body.classList.contains('theme-day');
 
-        // À l'arrêt : la queue remonte lentement vers la tête (résorption)
+        // À l'arrêt : la queue remonte lentement vers la tête
         if (!isScrolling && displayTailIdx < headIdx) {
-            displayTailIdx = Math.min(headIdx, displayTailIdx + 0.3);
+            const tailLength = headIdx - Math.floor(displayTailIdx);
+            const speed = 0.05 + Math.min(Math.sqrt(tailLength) * 0.08, 2.5);
+            displayTailIdx = Math.min(headIdx, displayTailIdx + speed);
         }
 
         const tailLength = headIdx - Math.floor(displayTailIdx);
@@ -222,9 +240,9 @@
 
                     const localProgress = (i - startI) / tailLength;
                     const fadeOpacity = Math.sin(localProgress * Math.PI);
-
                     const opacity = fadeOpacity * (0.3 + 0.7 * (0.5 + 0.5 * Math.sin(now * CONFIG.twinkleSpeed * 3 + i * 0.1)));
-                    if (opacity > 0.01) drawStar(screenX, screenY, CONFIG.starRadius, opacity);
+
+                    if (opacity > 0.01) drawStar(screenX, screenY, CONFIG.starRadius, opacity, isDay);
                 }
             }
         }
@@ -237,15 +255,21 @@
                 const screenY = star.y - scrollY;
                 if (screenY < -20 || screenY > canvas.height + 20) return;
                 const opacity = clusterOpacity * (0.4 + 0.6 * (0.5 + 0.5 * Math.sin(now * CONFIG.twinkleSpeed * 2 + star.phase)));
-                drawStar(star.x, screenY, star.radius, opacity);
+                drawStar(star.x, screenY, star.radius, opacity, isDay);
             });
         });
     }
 
-    function drawStar(x, y, radius, opacity) {
+    function drawStar(x, y, radius, opacity, isDay) {
+        const glowColor  = isDay ? '30, 144, 255'    : CONFIG.starColor;
+        const haloOpacity = isDay ? Math.min(1, opacity * 1.2) : opacity * 0.4;
+        const centerColor = isDay
+            ? `rgba(30, 144, 255, ${Math.min(1, opacity * 1.5)})`
+            : `rgba(255, 245, 180, ${opacity})`;
         const gradient = ctx.createRadialGradient(x, y, 0, x, y, radius * CONFIG.glowSize);
-        gradient.addColorStop(0, `rgba(${CONFIG.starColor}, ${opacity * 0.6})`);
-        gradient.addColorStop(1, `rgba(${CONFIG.starColor}, 0)`);
+        gradient.addColorStop(0, `rgba(${glowColor}, ${haloOpacity})`);
+        gradient.addColorStop(1, `rgba(${glowColor}, 0)`);
+
         ctx.beginPath();
         ctx.arc(x, y, radius * CONFIG.glowSize, 0, Math.PI * 2);
         ctx.fillStyle = gradient;
@@ -253,7 +277,7 @@
 
         ctx.beginPath();
         ctx.arc(x, y, radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 245, 180, ${opacity})`;
+        ctx.fillStyle = centerColor;
         ctx.fill();
     }
 

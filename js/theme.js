@@ -201,6 +201,22 @@
             body.theme-day #theme-overlay {
                 background: #dce8f5;
             }
+
+            /* Force le texte du masthead en noir en mode jour */
+            body.theme-day .masthead,
+            body.theme-day .masthead .container,
+            body.theme-day .masthead h1,
+            body.theme-day .masthead h2,
+            body.theme-day .masthead p,
+            body.theme-day .masthead .lead,
+            body.theme-day .masthead em,
+            body.theme-day .masthead .btn {
+                color: #000000 !important;
+            }
+
+            body.theme-day .masthead .btn {
+                color: #000000 !important;
+            }
         `;
         document.head.appendChild(style);
     }
@@ -263,13 +279,14 @@
     const masthead = document.querySelector('.masthead');
     if (masthead) {
         if (theme === 'day') {
-            masthead.style.backgroundImage = `url('assets/img/TON_IMAGE_JOUR.png')`;
+            masthead.style.backgroundImage = `url('assets/img/Calque 7.png')`;
         } else {
             masthead.style.backgroundImage = `url('assets/img/Calque_5.png'), url('assets/img/Calque_4.png')`;
         }
     }
         // Adapter le canvas d'étoiles si présent
         updateStarsForTheme(theme);
+        document.body.dispatchEvent(new Event('themechange'));
     }
  
     // Cache les étoiles du masthead en mode jour (optionnel)

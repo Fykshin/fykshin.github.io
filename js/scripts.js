@@ -283,6 +283,16 @@ window.addEventListener('DOMContentLoaded', event => {
 
         const langToggle = document.getElementById('lang-toggle-sidebar');
         const translatableItems = document.querySelectorAll('[data-lang-key]');
+
+        // Use the current HTML content as the default French translation for editable text,
+        // so manual changes in the page markup are not lost by the translation script.
+        translatableItems.forEach(item => {
+            const key = item.dataset.langKey;
+            if (translations.fr && translations.fr[key] !== undefined) {
+                translations.fr[key] = item.innerHTML;
+            }
+        });
+
         const currentLang = localStorage.getItem('language') || 'fr';
 
         const setLanguage = (lang) => {
