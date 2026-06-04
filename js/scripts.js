@@ -84,14 +84,14 @@ window.addEventListener('DOMContentLoaded', event => {
                 });
             });
 
-            // Animate portfolio items with stagger
-            gsap.utils.toArray('#Other .portfolio-item').forEach((item, idx) => {
-                gsap.fromTo(item, { x: 150 + idx * 20, opacity: 0 }, {
+            // Animate portfolio items together
+            gsap.utils.toArray('#Other .portfolio-item').forEach((item) => {
+                gsap.fromTo(item, { x: 150, opacity: 0 }, {
                     x: 0,
                     opacity: 1,
                     ease: 'power2.out',
                     duration: 0.7,
-                    delay: idx * 0.1,
+                    delay: 0,
                     scrollTrigger: {
                         trigger: item,
                         start: 'top 90%',
@@ -228,7 +228,7 @@ window.addEventListener('DOMContentLoaded', event => {
                 navTowerDefense: 'Tower Defense',
                 navOther: 'Autres projets',
                 headerTitle: 'Portfolio',
-                headerSubtitle: 'Bonjour!<br> Bienvenue sur mon portfolio! Je m\'appelle Guillaume Gachelin et je suis en première année de création de jeux vidéo. À ce qu\'on dit, le monde a besoin d\'être diverti alors me voici!',
+                headerSubtitle: '<em>1ère année en création de jeux vidéo à l\'ESMA</em>',
                 headerButton: 'En savoir plus',
                 platformerTitle: 'Projet de fin d\'année : Rabbit Factory',
                 platformerText: 'L\'objectif de ce projet est de concevoir seul un jeu de plateforme en 2D à défilement horizontal en trois mois. <br>Voici ce que j\'ai imaginé : Dans un laboratoire expérimental des années 2070, des chercheurs font des expériences sur des animaux. Un lapin, à la suite d’un effondrement, sort de sa cuve. Son objectif : s’échapper du labo. Pour l\'aider, il redécouvrira que ses oreilles ont des pouvoirs bien singuliers... <a href="https://fykshin.itch.io/Rabbit_Factory" style="color: black; background: none; border: none; text-decoration: underline;">itch.io</a> ! <br> Le principe de ce platformer est de débloquer de nouvelles capacités au fur et à mesure de la progression du joueur. Par exemple, le joueur pourra courir, sauter, faire des wall jumps et tourner le monde autour de lui. Pour pouvoir progresser dans le jeu, il lui faudra trouver un certain nombre de clés pour débloquer chaque salle.',
@@ -257,8 +257,8 @@ window.addEventListener('DOMContentLoaded', event => {
                 navRobot: 'Robot',
                 navTowerDefense: 'Tower Defense',
                 navOther: 'Other Projects',
-                headerTitle: 'Portfolio',
-                headerSubtitle: 'Hello!<br> Welcome to my portfolio! My name is Guillaume Gachelin and I am in my first year of video game creation. As they say, the world needs entertainment so here I am!',
+                headerTitle: 'Guillaume Gachelin Portfolio',
+                headerSubtitle: 'First year in video game creation at ESMA',
                 headerButton: 'Learn more',
                 platformerTitle: 'End-of-year project: Rabbit Factory',
                 platformerText: 'The objective of this project is to design a solo 2D side-scrolling platformer in three months. <br>This is what I imagined: In an experimental laboratory of the 2070s, researchers conduct experiments on animals. A rabbit, after a collapse, escapes from its tank. Its goal: to flee the lab. To help it, it will rediscover that its ears have very special powers... <a href="https://fykshin.itch.io/Rabbit_Factory" style="color: black; background: none; border: none; text-decoration: underline;">itch.io</a> ! <br> The principle of this platformer is to unlock new abilities as the player progresses. For example, the player can run, jump, wall jump, and rotate the world around them. To advance in the game, they must find a number of keys to unlock each room.',
